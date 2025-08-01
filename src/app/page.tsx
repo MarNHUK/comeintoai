@@ -544,8 +544,8 @@ export default function KIKursLandingPage() {
               <CardContent className="p-8 pt-16">
                 <div className="text-center mb-8">
                   <div className="text-4xl font-bold mb-2">
-                    <span className="line-through text-2xl text-gray-500 dark:text-gray-400">169€</span>
-                    <span className="text-cyan-600 dark:text-cyan-400 ml-2">129€</span>
+                    <span className="line-through text-2xl text-gray-500 dark:text-gray-400">179€</span>
+                    <span className="text-cyan-600 dark:text-cyan-400 ml-2">149€</span>
                   </div>
                   <p className="text-gray-600 dark:text-gray-300">Einmalig, alles inklusive</p>
                 </div>
@@ -624,7 +624,7 @@ export default function KIKursLandingPage() {
                 },
                 {
                   question: "Gibt es eine Geld-zurück-Garantie?",
-                  answer: "Ja! Du hast 30 Tage Geld-zurück-Garantie. Wenn der Kurs nicht deinen Erwartungen entspricht, bekommst du ohne Wenn und Aber dein Geld zurück."
+                  answer: "Ja! Du hast 30 Tage Geld-zurück-Garantie. Wenn der Kurs für 50%+ der Teilnehmer nicht der Ausschreibung entspricht, bekommst du ohne Wenn und Aber dein Geld zurück."
                 },
                 {
                   question: "Kann ich die Tools auch nach dem Kurs weiter nutzen?",
