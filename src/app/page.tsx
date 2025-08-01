@@ -488,7 +488,7 @@ export default function KIKursLandingPage() {
                         <Star key={i} className="h-4 w-4 text-yellow-400 fill-current" />
                       ))}
                     </div>
-                    <p className="text-muted-foreground mb-4">"{testimonial.text}"</p>
+                    <p className="text-muted-foreground mb-4">&ldquo;{testimonial.text}&rdquo;</p>
                     <div>
                       <div className="font-semibold">{testimonial.name}</div>
                       <div className="text-sm text-muted-foreground">{testimonial.role}</div>
