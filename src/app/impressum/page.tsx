@@ -1,5 +1,6 @@
 "use client";
 
+import Link from 'next/link';
 import { motion } from "framer-motion";
 import { Card, CardContent } from "@/components/ui/card";
 import { Phone, Mail, Globe } from "lucide-react";
@@ -18,16 +19,16 @@ export default function ImpressumPage() {
       <nav className="fixed top-0 left-0 right-0 bg-white/90 dark:bg-gray-900/90 backdrop-blur-md shadow-sm border-b border-white/20 dark:border-gray-800/20 z-50">
         <div className="container mx-auto px-4 py-4 flex items-center justify-between">
           <div className="text-xl font-bold text-cyan-600 dark:text-cyan-400">
-            <a href="/">KI-Kurs</a>
+            <Link href="/">KI-Kurs</Link>
           </div>
           <div className="flex items-center gap-3">
             <ThemeToggle />
-            <a 
+            <Link 
               href="/" 
               className="text-gray-600 dark:text-gray-300 hover:text-cyan-600 dark:hover:text-cyan-400 transition-colors"
             >
               Zurück zur Hauptseite
-            </a>
+            </Link>
           </div>
         </div>
       </nav>
