@@ -544,7 +544,7 @@ export default function KIKursLandingPage() {
               <CardContent className="p-8 pt-16">
                 <div className="text-center mb-8">
                   <div className="text-4xl font-bold mb-2">
-                    <span className="line-through text-2xl text-gray-500 dark:text-gray-400">179€</span>
+                    <span className="line-through text-2xl text-gray-500 dark:text-gray-400">199€</span>
                     <span className="text-cyan-600 dark:text-cyan-400 ml-2">149€</span>
                   </div>
                   <p className="text-gray-600 dark:text-gray-300">Einmalig, alles inklusive</p>
@@ -573,7 +573,7 @@ export default function KIKursLandingPage() {
                 <div className="text-center mt-4">
                   <div className="flex items-center justify-center space-x-2 text-sm text-gray-600 dark:text-gray-300">
                     <Shield className="h-4 w-4" />
-                    <span>30 Tage Geld-zurück-Garantie</span>
+                    <span>KI verstehen. Anwenden. Dranbleiben.</span>
                   </div>
                 </div>
               </CardContent>
@@ -623,10 +623,6 @@ export default function KIKursLandingPage() {
                   answer: "Die Live-Sessions dauern 1,5-2 Stunden. Dazu empfehlen wir 30-60 Minuten pro Woche zum Üben. Aber du bestimmst das Tempo - alle Materialien bleiben dir erhalten."
                 },
                 {
-                  question: "Gibt es eine Geld-zurück-Garantie?",
-                  answer: "Ja! Du hast 30 Tage Geld-zurück-Garantie. Wenn der Kurs für 50%+ der Teilnehmer nicht der Ausschreibung entspricht, bekommst du ohne Wenn und Aber dein Geld zurück."
-                },
-                {
                   question: "Kann ich die Tools auch nach dem Kurs weiter nutzen?",
                   answer: "Absolut! Die meisten Tools haben kostenlose Versionen, die für den Einstieg völlig ausreichen. Wir zeigen dir auch, wann sich Premium-Versionen lohnen."
                 }
@@ -674,7 +670,7 @@ export default function KIKursLandingPage() {
                 </div>
                 <div className="flex items-center space-x-2">
                   <CheckCircle className="h-4 w-4 text-cyan-500 dark:text-cyan-400" />
-                  <span>30 Tage Geld-zurück-Garantie</span>
+                  <span>KI verstehen. Anwenden. Dranbleiben.</span>
                 </div>
                 <div className="flex items-center space-x-2">
                   <CheckCircle className="h-4 w-4 text-cyan-500 dark:text-cyan-400" />
