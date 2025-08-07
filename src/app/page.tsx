@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { 
   Brain, 
@@ -14,7 +15,8 @@ import {
   Star,
   ArrowRight,
   Shield,
-  MessageCircle
+  MessageCircle,
+  Calendar
 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
@@ -23,6 +25,7 @@ import { Badge } from "@/components/ui/badge";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Separator } from "@/components/ui/separator";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
+import BookingModal from "@/components/BookingModal";
 
 const fadeInUp = {
   initial: { opacity: 0, y: 30 },
@@ -39,6 +42,11 @@ const staggerContainer = {
 };
 
 export default function KIKursLandingPage() {
+  const [isBookingModalOpen, setIsBookingModalOpen] = useState(false);
+
+  const openBookingModal = () => setIsBookingModalOpen(true);
+  const closeBookingModal = () => setIsBookingModalOpen(false);
+
   return (
     <div className="bg-gradient-to-br from-blue-50 via-white to-cyan-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 min-h-screen transition-colors duration-300">
       {/* Navigation */}
@@ -76,12 +84,28 @@ export default function KIKursLandingPage() {
                 Kreative Power mit ChatGPT, Bild & Video in nur 3 Abenden!
               </span>
             </h1>
-            <p className="text-lg md:text-xl text-gray-600 dark:text-gray-300 mb-8 max-w-3xl mx-auto">
+            <p className="text-lg md:text-xl text-gray-600 dark:text-gray-300 mb-6 max-w-3xl mx-auto">
               Kreative Power mit Text, Bild, Ton & Video – ganz ohne Technikkenntnisse. 
               Lerne von KI-Experten in kleinen Gruppen.
             </p>
+            
+            {/* Next Session Info */}
+            <div className="bg-gradient-to-r from-cyan-50 to-blue-50 dark:from-cyan-900/20 dark:to-blue-900/20 rounded-lg p-4 mb-8 max-w-2xl mx-auto border border-cyan-200 dark:border-cyan-800">
+              <div className="flex items-center justify-center space-x-3 text-cyan-700 dark:text-cyan-300">
+                <Calendar className="h-5 w-5" />
+                <span className="font-semibold">Nächste Durchführung: 26.-28. August 2025</span>
+                <span className="text-sm">•</span>
+                <span className="text-sm">Jeweils 19:00 Uhr</span>
+                <span className="text-sm">•</span>
+                <span className="text-sm">Online via Zoom</span>
+              </div>
+            </div>
             <div className="space-y-4 md:space-y-0 md:space-x-4 md:flex md:justify-center">
-              <Button size="lg" className="w-full md:w-auto text-lg px-8 py-4 bg-cyan-500 hover:bg-cyan-600 text-white">
+              <Button 
+                size="lg" 
+                className="w-full md:w-auto text-lg px-8 py-4 bg-cyan-500 hover:bg-cyan-600 text-white"
+                onClick={openBookingModal}
+              >
                 Jetzt Platz sichern! <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
               <Button size="lg" className="w-full md:w-auto text-lg px-8 py-4 bg-white/80 hover:bg-white dark:bg-gray-800/80 dark:hover:bg-gray-800 text-gray-700 dark:text-gray-300 border border-gray-200 dark:border-gray-700">
@@ -522,9 +546,36 @@ export default function KIKursLandingPage() {
             <h2 className="text-3xl md:text-4xl font-bold mb-6 text-gray-900 dark:text-white">
               Investiere in deine KI-Zukunft
             </h2>
-            <p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+            <p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto mb-8">
               Alles inklusive für deinen erfolgreichen KI-Einstieg
             </p>
+            
+            {/* Next Session Info */}
+            <div className="bg-gradient-to-r from-cyan-50 to-blue-50 dark:from-cyan-900/20 dark:to-blue-900/20 rounded-lg p-4 mb-12 max-w-2xl mx-auto border border-cyan-200 dark:border-cyan-800">
+              <div className="text-center">
+                <div className="flex items-center justify-center space-x-2 mb-2">
+                  <Calendar className="h-5 w-5 text-cyan-600 dark:text-cyan-400" />
+                  <span className="font-semibold text-cyan-700 dark:text-cyan-300">Nächste Durchführung</span>
+                </div>
+                <div className="grid md:grid-cols-3 gap-4 text-sm">
+                  <div className="flex items-center justify-center space-x-2">
+                    <span className="font-medium text-cyan-700 dark:text-cyan-300">Di, 26. Aug</span>
+                    <span className="text-cyan-600 dark:text-cyan-400">19:00-21:00</span>
+                  </div>
+                  <div className="flex items-center justify-center space-x-2">
+                    <span className="font-medium text-cyan-700 dark:text-cyan-300">Mi, 27. Aug</span>
+                    <span className="text-cyan-600 dark:text-cyan-400">19:00-21:00</span>
+                  </div>
+                  <div className="flex items-center justify-center space-x-2">
+                    <span className="font-medium text-cyan-700 dark:text-cyan-300">Do, 28. Aug</span>
+                    <span className="text-cyan-600 dark:text-cyan-400">19:00-21:00</span>
+                  </div>
+                </div>
+                <div className="mt-2 text-xs text-cyan-600 dark:text-cyan-400">
+                  📍 Online via Zoom • Kleine Gruppen • Persönliche Betreuung
+                </div>
+              </div>
+            </div>
           </motion.div>
 
           <motion.div 
@@ -566,7 +617,11 @@ export default function KIKursLandingPage() {
                   ))}
                 </div>
 
-                <Button size="lg" className="w-full text-lg py-6 bg-cyan-500 hover:bg-cyan-600 text-white">
+                <Button 
+                  size="lg" 
+                  className="w-full text-lg py-6 bg-cyan-500 hover:bg-cyan-600 text-white"
+                  onClick={openBookingModal}
+                >
                   Jetzt Platz sichern!
                 </Button>
                 
@@ -659,9 +714,13 @@ export default function KIKursLandingPage() {
             </p>
             
             <div className="space-y-6">
-              <Button size="lg" className="text-xl px-12 py-6 bg-cyan-500 hover:bg-cyan-600 text-white">
-                Jetzt Platz sichern! <ArrowRight className="ml-2 h-6 w-6" />
-              </Button>
+                          <Button 
+              size="lg" 
+              className="text-xl px-12 py-6 bg-cyan-500 hover:bg-cyan-600 text-white"
+              onClick={openBookingModal}
+            >
+              Jetzt Platz sichern! <ArrowRight className="ml-2 h-6 w-6" />
+            </Button>
               
               <div className="flex flex-wrap justify-center gap-6 text-sm text-gray-600 dark:text-gray-300">
                 <div className="flex items-center space-x-2">
@@ -705,8 +764,8 @@ export default function KIKursLandingPage() {
               <h3 className="font-semibold mb-4 text-gray-900 dark:text-white">Rechtliches</h3>
               <div className="space-y-2 text-gray-600 dark:text-gray-300">
                 <a href="/impressum" className="block hover:text-cyan-600 dark:hover:text-cyan-400 transition-colors">Impressum</a>
-                <a href="#" className="block hover:text-cyan-600 dark:hover:text-cyan-400 transition-colors">Datenschutz</a>
-                <a href="#" className="block hover:text-cyan-600 dark:hover:text-cyan-400 transition-colors">AGB</a>
+                <a href="/datenschutz" className="block hover:text-cyan-600 dark:hover:text-cyan-400 transition-colors">Datenschutz</a>
+                <a href="/cookie-einstellungen" className="block hover:text-cyan-600 dark:hover:text-cyan-400 transition-colors">Cookie-Einstellungen</a>
               </div>
             </div>
           </div>
@@ -718,6 +777,12 @@ export default function KIKursLandingPage() {
           </div>
         </div>
       </footer>
+
+      {/* Booking Modal */}
+      <BookingModal 
+        isOpen={isBookingModalOpen} 
+        onClose={closeBookingModal} 
+      />
     </div>
   );
 }
