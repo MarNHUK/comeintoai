@@ -95,7 +95,7 @@ export default function KIKursLandingPage() {
                 <Calendar className="h-5 w-5" />
                 <span className="font-semibold">Nächste Durchführung: 26.-28. August 2025</span>
                 <span className="text-sm">•</span>
-                <span className="text-sm">Jeweils 19:00 Uhr</span>
+                <span className="text-sm">Jeweils ab 19 Uhr</span>
                 <span className="text-sm">•</span>
                 <span className="text-sm">Online via Zoom</span>
               </div>
@@ -560,15 +560,15 @@ export default function KIKursLandingPage() {
                 <div className="grid md:grid-cols-3 gap-4 text-sm">
                   <div className="flex items-center justify-center space-x-2">
                     <span className="font-medium text-cyan-700 dark:text-cyan-300">Di, 26. Aug</span>
-                    <span className="text-cyan-600 dark:text-cyan-400">19:00-21:00</span>
+                    <span className="text-cyan-600 dark:text-cyan-400">ab 19 Uhr</span>
                   </div>
                   <div className="flex items-center justify-center space-x-2">
                     <span className="font-medium text-cyan-700 dark:text-cyan-300">Mi, 27. Aug</span>
-                    <span className="text-cyan-600 dark:text-cyan-400">19:00-21:00</span>
+                    <span className="text-cyan-600 dark:text-cyan-400">ab 19 Uhr</span>
                   </div>
                   <div className="flex items-center justify-center space-x-2">
                     <span className="font-medium text-cyan-700 dark:text-cyan-300">Do, 28. Aug</span>
-                    <span className="text-cyan-600 dark:text-cyan-400">19:00-21:00</span>
+                    <span className="text-cyan-600 dark:text-cyan-400">ab 19 Uhr</span>
                   </div>
                 </div>
                 <div className="mt-2 text-xs text-cyan-600 dark:text-cyan-400">

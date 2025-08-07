@@ -108,7 +108,7 @@ export default function BookingModal({ isOpen, onClose }: BookingModalProps) {
                        <div className="flex items-center space-x-3">
                          <Clock className="h-5 w-5 text-cyan-500" />
                          <div>
-                           <h3 className="font-semibold text-gray-900 dark:text-white">Jeweils 19:00 Uhr</h3>
+                           <h3 className="font-semibold text-gray-900 dark:text-white">Jeweils ab 19 Uhr</h3>
                            <p className="text-sm text-gray-600 dark:text-gray-400">1,5-2 Stunden pro Abend</p>
                          </div>
                        </div>
@@ -143,15 +143,15 @@ export default function BookingModal({ isOpen, onClose }: BookingModalProps) {
                      <div className="space-y-2 text-sm">
                        <div className="flex items-center justify-between">
                          <span className="text-blue-800 dark:text-blue-200">Dienstag, 26. August 2025</span>
-                         <span className="font-medium text-blue-900 dark:text-blue-100">19:00 - 21:00 Uhr</span>
+                         <span className="font-medium text-blue-900 dark:text-blue-100">ab 19 Uhr</span>
                        </div>
                        <div className="flex items-center justify-between">
                          <span className="text-blue-800 dark:text-blue-200">Mittwoch, 27. August 2025</span>
-                         <span className="font-medium text-blue-900 dark:text-blue-100">19:00 - 21:00 Uhr</span>
+                         <span className="font-medium text-blue-900 dark:text-blue-100">ab 19 Uhr</span>
                        </div>
                        <div className="flex items-center justify-between">
                          <span className="text-blue-800 dark:text-blue-200">Donnerstag, 28. August 2025</span>
-                         <span className="font-medium text-blue-900 dark:text-blue-100">19:00 - 21:00 Uhr</span>
+                         <span className="font-medium text-blue-900 dark:text-blue-100">ab 19 Uhr</span>
                        </div>
                      </div>
                      <div className="mt-3 pt-3 border-t border-blue-200 dark:border-blue-700">
