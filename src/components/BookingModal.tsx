@@ -25,12 +25,57 @@ interface BookingModalProps {
 export default function BookingModal({ isOpen, onClose }: BookingModalProps) {
   const [step, setStep] = useState<'info' | 'payment' | 'success'>('info');
   const [isLoading, setIsLoading] = useState(false);
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
+
+  const isValidEmail = (value: string) =>
+    /^(?:[a-zA-Z0-9_'^&\-]+(?:\.[a-zA-Z0-9_'^&\-]+)*|"(?:[^"\\]|\\.)+")@(?:(?:[a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-zA-Z-]*[a-zA-Z]:.+)\])$/.test(
+      value.trim()
+    );
+  const isFormValid =
+    firstName.trim().length > 1 &&
+    lastName.trim().length > 1 &&
+    isValidEmail(email);
 
   const handlePayment = () => {
+    if (!isFormValid) return;
     setIsLoading(true);
-    // Stripe Payment Link öffnen
-    window.open('https://buy.stripe.com/4gMcN63IG2kl8EG0Ty5Vu00', '_blank');
-    
+
+    const baseLink = 'https://buy.stripe.com/4gMcN63IG2kl8EG0Ty5Vu00';
+    const url = new URL(baseLink);
+    // E-Mail vorbefüllen und weitere Daten als Metadaten übergeben
+    url.searchParams.set('prefilled_email', email.trim());
+    url.searchParams.set('client_reference_id', `${firstName.trim()} ${lastName.trim()}`);
+    url.searchParams.set('prefilled_metadata[first_name]', firstName.trim());
+    url.searchParams.set('prefilled_metadata[last_name]', lastName.trim());
+
+    // Webhook non-blocking auslösen
+    try {
+      const webhookUrl = 'https://nhuk.app.n8n.cloud/webhook/c33ea74d-5e00-4250-9468-d292436c7ca5';
+      const payload = {
+        event: 'booking_payment_click',
+        firstName: firstName.trim(),
+        lastName: lastName.trim(),
+        email: email.trim(),
+        stripePaymentLink: url.toString(),
+        pageUrl: typeof window !== 'undefined' ? window.location.href : undefined,
+        userAgent: typeof navigator !== 'undefined' ? navigator.userAgent : undefined,
+        timestamp: new Date().toISOString(),
+      };
+      // nicht warten; Fehler ignorieren, Zahlung nicht blockieren
+      fetch(webhookUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+        keepalive: true,
+      }).catch(() => {});
+    } catch {
+      // noop
+    }
+
+    window.open(url.toString(), '_blank');
+
     // Nach kurzer Verzögerung zum Erfolgs-Schritt
     setTimeout(() => {
       setIsLoading(false);
@@ -236,6 +281,46 @@ export default function BookingModal({ isOpen, onClose }: BookingModalProps) {
                     </p>
                   </div>
 
+                  {/* Buyer details */}
+                  <div className="rounded-lg border border-gray-200 dark:border-gray-700 p-4 bg-white/60 dark:bg-gray-800/60">
+                    <h3 className="font-semibold text-gray-900 dark:text-white mb-3">Ihre Angaben</h3>
+                    <div className="grid md:grid-cols-2 gap-4">
+                      <div>
+                        <label className="block text-sm text-gray-700 dark:text-gray-300 mb-1">Vorname</label>
+                        <input
+                          type="text"
+                          value={firstName}
+                          onChange={(e) => setFirstName(e.target.value)}
+                          placeholder="Max"
+                          className="w-full rounded-md border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 px-3 py-2 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-cyan-500"
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-sm text-gray-700 dark:text-gray-300 mb-1">Nachname</label>
+                        <input
+                          type="text"
+                          value={lastName}
+                          onChange={(e) => setLastName(e.target.value)}
+                          placeholder="Mustermann"
+                          className="w-full rounded-md border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 px-3 py-2 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-cyan-500"
+                        />
+                      </div>
+                      <div className="md:col-span-2">
+                        <label className="block text-sm text-gray-700 dark:text-gray-300 mb-1">E-Mail</label>
+                        <input
+                          type="email"
+                          value={email}
+                          onChange={(e) => setEmail(e.target.value)}
+                          placeholder="max@example.com"
+                          className="w-full rounded-md border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 px-3 py-2 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-cyan-500"
+                        />
+                        {!isValidEmail(email) && email.length > 0 && (
+                          <p className="mt-1 text-xs text-red-600">Bitte geben Sie eine gültige E-Mail-Adresse ein.</p>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+
                   <div className="bg-blue-50 dark:bg-blue-900/20 rounded-lg p-4 border border-blue-200 dark:border-blue-800">
                     <div className="flex items-start space-x-3">
                       <Shield className="h-5 w-5 text-blue-600 dark:text-blue-400 mt-0.5" />
@@ -257,7 +342,7 @@ export default function BookingModal({ isOpen, onClose }: BookingModalProps) {
                     <Button
                       onClick={handlePayment}
                       size="lg"
-                      disabled={isLoading}
+                      disabled={isLoading || !isFormValid}
                       className="flex-1 bg-cyan-500 hover:bg-cyan-600 text-white font-medium py-4"
                     >
                       {isLoading ? (
